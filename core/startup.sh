@@ -3,7 +3,7 @@ echo "Installing bash..."
 apk add bash
 
 echo "Installing dependiencies..."
-yarn install
+pip install -r requirements.txt
 
 if [ $ENV = "prod" ]; then
   echo "------------ PRODUCTION MODE ------------"
@@ -11,7 +11,6 @@ if [ $ENV = "prod" ]; then
   yarn start
 else
   echo "------------ DEVELOPMENT MODE ------------"
-  pip install -r requirements.txt
   uvicorn main:app --host 0.0.0.0 --port 8000
 fi
 
