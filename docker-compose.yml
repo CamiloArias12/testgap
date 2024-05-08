@@ -1,0 +1,33 @@
+services:
+  web:
+    build: ./web
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web:/app
+    env_file:
+      - .env
+    networks:
+      app:
+        ipv4_address: 10.6.0.4
+
+  core:
+    build: ./core
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./core:/app
+    env_file:
+      - .env
+
+    networks:
+      app:
+        ipv4_address: 10.6.0.3
+
+networks:
+  app:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/16
+          gateway: 10.6.0.1
