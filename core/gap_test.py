@@ -38,7 +38,7 @@ def table_generate(size,list_gap,trust_level,beta,alfa):
     count_gap=[]
     ei=[]
     ei_final=[]
-    for i in range(0,size):
+    for i in range(0,size+1):
         if(size==i):
             count_gap.append(count_size_gap(i,list_gap,False))
         else:
@@ -46,16 +46,22 @@ def table_generate(size,list_gap,trust_level,beta,alfa):
 
        
     total_gap=sum(count_gap)
+
     print(total_gap)
-    print("Ls",ls)
-    for i in range(0,size):
+    for i in range(0,size+1):
         if(i<size):
+            print("EI",total_gap*ls*pow(1-ls,i))
             ei.append(total_gap*ls*pow(1-ls,i))
         else:
             ei.append(total_gap*pow(1-ls,i))
 
-    for i in range(0,size):
+    for i in range(0,size+1):
         ei_final.append(pow(ei[i]-count_gap[i],2)/ei[i])
+    total_ei=sum(ei)
+    total_ei_final=sum(ei_final)
+    count_gap.append(total_gap)
+    ei.append(int(total_ei))
+    ei_final.append(total_ei_final)
 
     return [count_gap,ei,ei_final]
 
@@ -80,7 +86,7 @@ def main(data):
     print(list_count)
     list_gap=gap_count(list_count)
     print(list_gap)
-    table=table_generate(data.size_gap,list_gap,0.05,data.beta,data.alfa)
+    table=table_generate(data.gap_level,list_gap,0.05,data.beta,data.alfa)
     print(len(list_random),len(list_count),len(list_gap))
     
     return {
