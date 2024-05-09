@@ -7,7 +7,11 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.post("/resolver")
-def get_graph(data:DataInput):
+@app.post("/")
+def resolve(data:DataInput):
     return main(data)
+
+@app.get("/")
+def get_():
+    return {"data":"Hello"}
 
