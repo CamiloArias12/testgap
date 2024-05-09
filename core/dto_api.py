@@ -6,7 +6,7 @@ class DataInput (BaseModel):
     seed_two:int
     beta:float
     alfa:float
-    size_gap:int
+    gap_level:int
     trust_level:float
     quantity_numbers:int
 
